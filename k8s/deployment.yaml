@@ -17,10 +17,10 @@ spec:
         image: <IMAGE_PLACEHOLDER>
         resources:
           requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 250m
+            cpu: 500m
             memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
         ports:
         - containerPort: 4200
