@@ -4,18 +4,17 @@ FROM node:alpine
 # Diretório de trabalho dentro do container
 WORKDIR /usr/src/app
 
-# Copiar apenas o package.json e o package-lock.json para instalar as dependências
-COPY ./app/package.json ./app/package-lock.json ./app/
+# Copiar apenas o package.json e o package-lock.json do diretório 'api' para instalar as dependências
+COPY api/package.json api/package-lock.json ./
 
 # Instalar as dependências (agora no diretório correto)
-WORKDIR /usr/src/app/app
 RUN npm install
 
 # Instalar o Angular CLI globalmente
 RUN npm install -g @angular/cli
 
-# Copiar todo o código para o container
-COPY ./app /usr/src/app/app
+# Copiar todo o código da pasta 'api' para o container
+COPY api /usr/src/app
 
 # Expor a porta 4200
 EXPOSE 4200
