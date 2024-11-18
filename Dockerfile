@@ -4,8 +4,8 @@ FROM node:alpine
 # Diretório de trabalho dentro do container
 WORKDIR /usr/src/app
 
-# Copiar apenas o package.json e o package-lock.json do diretório 'api' para instalar as dependências
-COPY api/package.json api/package-lock.json ./
+# Copiar apenas o package.json da pasta 'api' para instalar as dependências
+COPY api/package.json ./
 
 # Instalar as dependências (agora no diretório correto)
 RUN npm install
