@@ -29,7 +29,7 @@ jobs:
         
     # Create Secret manually in ingress-basic namespace
     - run: |
-        kubectl create secret docker-registry k8s-secret \
+        kubectl create secret docker-registry k8s-secret-front \
           --docker-server=angularapp.azurecr.io \
           --docker-username=${{ secrets.ACR_USERNAME }} \
           --docker-password=${{ secrets.ACR_PASSWORD }} \
@@ -47,5 +47,5 @@ jobs:
         images: |
           angularapp.azurecr.io/frontend:${{ github.sha }}
         imagepullsecrets: |
-          k8s-secret
+          k8s-secret-front
         namespace: ingress-basic
