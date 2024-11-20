@@ -26,16 +26,7 @@ jobs:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: pixelCluster
         resource-group: gr-pixel-containers
-        
-    # Create Secret manually in ingress-basic namespace
-    - run: |
-        kubectl create secret docker-registry k8s-secret-front \
-          --docker-server=angularapp.azurecr.io \
-          --docker-username=${{ secrets.ACR_USERNAME }} \
-          --docker-password=${{ secrets.ACR_PASSWORD }} \
-          --namespace=ingress-basic
-
-
+      
     - name: Update deployment image
       run: |
         sed -i 's|<IMAGE_PLACEHOLDER>|angularapp.azurecr.io/frontend:${{ github.sha }}|' k8s/deployment.yaml
