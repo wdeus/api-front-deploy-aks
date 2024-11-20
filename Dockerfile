@@ -11,7 +11,7 @@ COPY api/package.json ./
 RUN npm install
 
 # Instalar o Angular CLI globalmente
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli@13
 
 # Copiar todo o código da pasta 'api' para o container
 COPY api /usr/src/app
