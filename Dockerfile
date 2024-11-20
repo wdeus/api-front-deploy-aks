@@ -1,16 +1,16 @@
-# Usando a imagem Node base (alpine) para uma construção mais leve
-FROM node:alpine
+# Usando a imagem Node LTS (alpine) para maior estabilidade
+FROM node:18-alpine
 
 # Diretório de trabalho dentro do container
 WORKDIR /usr/src/app
 
-# Copiar apenas o package.json da pasta 'api' para instalar as dependências
-COPY api/package.json ./
+# Copiar o package.json e o package-lock.json para instalar as dependências
+COPY api/package*.json ./
 
-# Instalar as dependências (agora no diretório correto)
+# Instalar as dependências
 RUN npm install
 
-# Instalar o Angular CLI globalmente
+# Instalar o Angular CLI globalmente (versão LTS)
 RUN npm install -g @angular/cli@13
 
 # Copiar todo o código da pasta 'api' para o container
