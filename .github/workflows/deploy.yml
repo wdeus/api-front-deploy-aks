@@ -27,12 +27,14 @@ jobs:
         cluster-name: pixelCluster
         resource-group: gr-pixel-containers
         
-    - uses: Azure/k8s-create-secret@v1
-      with:
-        container-registry-url: angularapp.azurecr.io
-        container-registry-username: ${{ secrets.ACR_USERNAME }}
-        container-registry-password: ${{ secrets.ACR_PASSWORD }}
-        secret-name: k8s-secret
+    # Create Secret manually in ingress-basic namespace
+    - run: |
+        kubectl create secret docker-registry k8s-secret \
+          --docker-server=angularapp.azurecr.io \
+          --docker-username=${{ secrets.ACR_USERNAME }} \
+          --docker-password=${{ secrets.ACR_PASSWORD }} \
+          --namespace=ingress-basic
+
 
     - name: Update deployment image
       run: |
@@ -46,3 +48,4 @@ jobs:
           angularapp.azurecr.io/frontend:${{ github.sha }}
         imagepullsecrets: |
           k8s-secret
+        namespace: ingress-basic
